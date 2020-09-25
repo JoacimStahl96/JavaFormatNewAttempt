@@ -1,9 +1,7 @@
 package JavaFormatNewAttempt;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -14,24 +12,38 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/*
+ *  this class contains the negative image and acts as a listener for the negativeButton.
+ */
 public class ButtonListenerNegative implements ActionListener{
 
 	private JLabel imageNegativeConverted;
 	 BufferedImage negativeImage;
-
-	public ButtonListenerNegative(JLabel negative) { // method which connects this class into the userinterface class negativeButton button.
+	 
+	 /*
+	  * method which connects this class into the UserInterface class negativeButton button.
+	  */
+	public ButtonListenerNegative(JLabel negative) {  
 		
-		this.imageNegativeConverted = negative;  // connects the image to this method.
+		this.imageNegativeConverted = negative;  
 
 	}
-
+	
+	/*
+	 * when negativeButton button is pressed the code within is activated.
+	 */
 	@Override
-	public void actionPerformed(ActionEvent e) { // when negativeButton button is pressed the code within is activated.
+	public void actionPerformed(ActionEvent e) { // 
 
-		negativeImage();  // grabs the method which changes the picture
+		negativeImage();  
 	}
+	
+	/*
+	 *  method which changes the images colors pixels to it's negative colors value
+	 *  converts the image into an ImageIcon and sets the size of it.
+	 */
 
-	public void negativeImage() {  // method which changes the image
+	public void negativeImage() {  
 		
 		try {
 			negativeImage = ImageIO.read(new File("JavaFormatHaloReach.jpg"));
@@ -39,7 +51,7 @@ public class ButtonListenerNegative implements ActionListener{
 			
 			e.printStackTrace();
 		}
-		for (int x = 0; x < negativeImage.getWidth(); x++) {  // changes the images colors pixel wise to it's negative colors
+		for (int x = 0; x < negativeImage.getWidth(); x++) {  // 
 			for (int y = 0; y < negativeImage.getHeight(); y++) {
 				int rgba = negativeImage.getRGB(x, y);
 				Color col = new Color(rgba, true);
@@ -47,9 +59,9 @@ public class ButtonListenerNegative implements ActionListener{
 				negativeImage.setRGB(x, y, col.getRGB());
 			}
 		}
-		Image nImg = negativeImage.getScaledInstance(1920, 1080,Image.SCALE_SMOOTH); // attempt to re-size the image
+		Image nImg = negativeImage.getScaledInstance(1920, 1080,Image.SCALE_SMOOTH); 
 		
-		imageNegativeConverted.setIcon(new ImageIcon(nImg)); // converts the image into a JLabel ImageIcon.
+		imageNegativeConverted.setIcon(new ImageIcon(nImg)); 
 
 	}
 	

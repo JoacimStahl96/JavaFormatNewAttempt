@@ -1,6 +1,5 @@
 package JavaFormatNewAttempt;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,29 +12,49 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/*
+ *  this class changes the size of the image and acts as a listener for the smallSizeButton.
+ */
+
 public class SmallSizeListener extends JFrame implements ActionListener{
 	
- //	private JLabel smallSizeConverted;
-	BufferedImage image;
+ 	private JLabel smallSizeConverted;
+	BufferedImage smallSizeImage;
 	
-	ImageClass images = new ImageClass(image);
+	ImageClass images = new ImageClass(smallSizeImage);
 	
-	public SmallSizeListener(BufferedImage myImage) {
+	/*
+	 *  listener connected to the smallSizeButton
+	 */
+	public SmallSizeListener(JLabel smallImage) {
 	
-	//	Object smallsize = images.smallSizeImage();
-	
-		
-		
-	//	images.loadImage();
-		images.smallSizeImage();
+		this.smallSizeConverted = smallImage;
 	}
-
+	
+	/*
+	 * when smallSizeButton is pressed this method is activated
+	 */
 	@Override
-	public void actionPerformed(ActionEvent e) { // when smallSizeButton button is pressed the code within is activated.
+	public void actionPerformed(ActionEvent e) { 
 
-	//	images.loadImage();
-		images.smallSizeImage();
+		smallSizeImage();
 		
+	}
+	/*
+	 *  method which changes the image size and then converts the image into a JLabel ImageIcon.
+	 */
+	public void smallSizeImage() {
+		
+		try {
+			smallSizeImage = ImageIO.read(new File("JavaFormatHaloReach.jpg"));
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		Image image = smallSizeImage.getScaledInstance(400, 200,Image.SCALE_SMOOTH);
+	
+		 
+		 smallSizeConverted.setIcon(new ImageIcon(image));
 	}
 
 }
